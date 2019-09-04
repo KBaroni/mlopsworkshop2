@@ -13,8 +13,9 @@ This workshop will use Azure DevOps, Azure Machine Learning Services, and assume
 - An active Azure subscription  
 - At least contributor role access to the Azure subscription
 - Access to an Azure DevOps account
-- With contributor level access, create a service principal in the Azure portal (see *MandatoryLabPreReq* document in this repository)
-- Assign contributor role access to the service principal. A service principal and credentials will be used for authentication within the AML pipelines. Because a service principal is created outside of the subscription (in Azure Active Directory), in order to use it for AML Pipelines, the service principal needs to be assigned to a contributor role within the Azure subscription (see *MandatoryLabPreReq* document in this repository).   
+- With contributor level access, create a service principal in the Azure portal (see *MandatoryLabPreReq* document in this repository) and a password/secret
+- Assign contributor role access to the service principal. A service principal and credentials will be used for authentication within the AML pipelines. Because a service principal is created outside of the subscription (in Azure Active Directory), in order to use it for AML Pipelines, the service principal needs to be assigned to a contributor role within the Azure subscription (see *MandatoryLabPreReq* document in this repository)  
+- An empty Resource Group in the Azure Subscription with you designated as an owner.  If you have contributor role level permissions in the Azure subscription, an Admin for the subscription will need to add you as an owner to the Resource Group
 
 ## Agenda
 
@@ -28,3 +29,6 @@ This workshop will use Azure DevOps, Azure Machine Learning Services, and assume
 | 1:00 – 3:30   | Lab: Implement a build, retrain, and deployment pipeline    |
 | 3:30 - 4:00   | Wrap-up                                                     |
 
+## Sources & Acknowledgements
+
+This lab uses Azure DevOps and Azure Machine Learning Services and is heavily based on the work and guidance published here:  https://github.com/Microsoft/MLOpsPython.
