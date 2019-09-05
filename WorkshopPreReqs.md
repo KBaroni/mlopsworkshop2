@@ -12,9 +12,16 @@ To complete the labs for the AI DevOps workshop you will need the following:
 - To provision a service principal
 - Assign RBAC permissions to the service principal (contributor role)
 - Confirm you have at least contributor level permissions within the azure subscription
+- Create a Resource Group with owner level permissions
 - Access to an Azure DevOps account. We will be running our build, retraining, and release pipelines using Azure DevOps. To verify you have an existing account, navigate to [http://devops.azure.com](http://devops.azure.com) and verify. If you don&#39;t already have a DevOps account, create one by following the instructions [](https://docs.microsoft.com/en-us/azure/devops/organizations/accounts/create-organization?view=azure-devops)
 
-The instructions below walk through the steps for these pre-requisites. Azure documentation references for these steps are also available:
+The instructions below walk through the steps for these pre-requisites:
+- Provision a Service Principal
+- Assign RBAC permissions (contributor level) to Service Principal
+- Create Resource Group and confirm you have ownership permissions in the Resource Group
+- Confirm your permissions level within the Azure subscription
+
+Azure documentation references for these steps are also available:
 
 - [How to: Use the portal to create an Azure AD application and service principal that can access resources](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal)
 
@@ -86,6 +93,9 @@ Now that the service principal is created, the correct permissions need to be ad
 
 ![](./images/LabPreReq8.png)
 
+### Create a Resource Group and confirm you have owner level permissions 
+
+Create a Resource Group in the Azure subscription.  This resource group will be used in the lab to provision all the services needed to execute the lab. If you have contributor role permissions to the subscription, by default you will be assigned contribor role permissions to the resource group.  To complete this lab you need &#39;owner&#39; level permissions on the resource group. To get set up with owner level permissions, have an Azure Administrator add you as an owner to your Resource Group.    
 
 ### Confirm your permissions level within the Azure subscription
 
