@@ -2,32 +2,43 @@
 
 ### Introduction
 
-The AI DevOps workshop will walk you through how to build a Continuous Integration and Continuous Delivery (CI/CD) pipeline for a machine learning model. The two Azure services that will be used to construct the solution are _Azure DevOps_ and _Azure Machine Learning_. The solution can be adapted for other popular build systems like Jenkins and Travis.
+The AI DevOps workshop will walk you through how to build a Continuous Integration and Continuous Deployment (CI/CD) pipeline for a machine learning model. The two Azure services that will be used to construct the solution are _Azure DevOps_ and _Azure Machine Learning Services_. The solution can be adapted for other popular build systems like Jenkins and Travis.
 
 ### Prerequisites
 
 To complete the labs for the AI DevOps workshop you will need the following:
 
-- An active Azure subscription ([start free](https://azure.microsoft.com/en-us/free/)).
-- To provision a service principal
-- Assign RBAC permissions to the service principal (contributor role)
-- Confirm you have at least contributor level permissions within the azure subscription
-- Create a Resource Group with owner level permissions
+- An active Azure subscription with at least **Contributor** role access
+- To provision a service principal and assign RBAC permissions to the service principal (contributor role)
+- Create a Resource Group with **Owner** level permissions
 - Access to an Azure DevOps account. We will be running our build, retraining, and release pipelines using Azure DevOps. To verify you have an existing account, navigate to [http://devops.azure.com](http://devops.azure.com) and verify. If you don&#39;t already have a DevOps account, create one by following the instructions [](https://docs.microsoft.com/en-us/azure/devops/organizations/accounts/create-organization?view=azure-devops)
 
-The instructions below walk through the steps for these pre-requisites:
+The instructions below walk through the steps for these pre-requisites.  For some of these steps you may need assistance from the Admin for the Azure Subscription:
+- Confirm your permissions level within the Azure subscription
 - Provision a Service Principal
 - Assign RBAC permissions (contributor level) to Service Principal
 - Create Resource Group and confirm you have ownership permissions in the Resource Group
-- Confirm your permissions level within the Azure subscription
 
 Azure documentation references for these steps are also available:
 
 - [How to: Use the portal to create an Azure AD application and service principal that can access resources](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal)
 
+### Confirm your permissions level within the Azure subscription
+
+To complete the lab, you will need at least **contributor** level access to the Azure subscription. To view your access:
+
+1. From the azure portal ([http://portal.azure.com](http://portal.azure.com)), select subscriptions in the navigation bar and click on the subscription you will be using for this lab
+2. Select Access control (IAM) from the left menu
+3. Under the &#39;check access&#39; tab, search for your name and when it displays, review the role assigned to you. It should look similar to this:
+
+###
+
+![](./images/LabPreReq9.png)
+
+
 ### Provision a Service Principal
 
-A service principal will be used by Azure DevOps to execute the pipelines and deploy resources into your Azure subscription. A service principal is generated when you create an Azure Active Directory application (sometimes the two are referred to interchangeably). To create an Azure AD application, you will need to have at least &#39;contributor&#39; level role within the azure subscription.
+A service principal will be used by Azure DevOps to execute the pipelines and deploy resources into your Azure subscription. A service principal is generated when you create an Azure Active Directory application (sometimes the two are referred to interchangeably). To create an Azure AD application, you will need to have at least **contributor** level role within the azure subscription.
 
 As you work through this section, be sure to note down the following values because you will need them during the workshop when you configure and connect your Azure DevOps pipelines to your Azure subscription:
 
@@ -60,31 +71,28 @@ To provision a Service principal, create an Azure Active Directory application:
  ![](./images/LabPreReq3.png)
      
 
-5. Once you have copied and saved these values, create a password for the service principal.
-  a. Select **Certificates &amp; secrets**.
-  b. Select **Client secrets -\&gt; New client secret**.
-  c. Provide a description of the secret, and a duration. When done, select **Add**.
+5. Once you have copied and saved these values, create a password for the service principal.  Select **Certificates &amp; secrets** -> Select **Client secrets** -> **New client secret** -> Provide a description of the secret, and a duration. When done, select **Add**.
 
 After saving the client secret, the value of the client secret is displayed. Copy this value because you will not be able to retrieve the key later. You provide the key value with the application ID to sign in as the application. Store the key value where your application can retrieve it.
 
  ![](./images/LabPreReq4.png)
      
 
-6. **Reminder: When you click Add, the key will appear only once so make sure you copy it somewhere safe for later use**.
+6. **Reminder**: When you click Add, the key will appear only once so make sure you copy it somewhere safe for later use.
 
  ![](./images/LabPreReq5.png)
 
      
 ### Assign RBAC permissions to Service Principal (Contributor role)
 
-Now that the service principal is created, the correct permissions need to be added to it so it can run the Azure DevOps pipelines. The service principal needs to be provided the &#39;contributor&#39; role to the azure subscription that will be used for the lab. An administrator for the Azure subscription would be the one to perform this function. The steps follow:
+Now that the service principal is created, the correct permissions need to be added to it so it can run the Azure DevOps pipelines. The service principal needs to be provided the *contributor* role to the azure subscription that will be used for the lab. An administrator for the Azure subscription would be the one to perform this function. The steps follow:
 
 1. Navigate to the azure portal ([http://portal.azure.com](http://portal.azure.com))
-2. Select All services -\&gt; Subscriptions. You will be presented with a list of azure subscriptions. Select the subscription that will be used for this lab.
+2. Select All services -> Subscriptions. You will be presented with a list of azure subscriptions. Select the subscription that will be used for this lab.
 
 ![](./images/LabPreReq6.png)
 
-3. Select Access control (IAM) and under Check access, do a search for your service principal name. Once it appears, select Add a role assignment. Note: If the Add box is greyed out, then you do not have sufficient permissions to add a role assignment to the service principal. An administrator for the subscription will need to help and complete the steps to add your service principal to the subscription contributor role.
+3. Select Access control (IAM) and under Check access, do a search for your service principal name. Once it appears, select Add a role assignment. **Note**: If the Add box is greyed out, then you do not have sufficient permissions to add a role assignment to the service principal. An administrator for the subscription will need to help and complete the steps to add your service principal to the subscription contributor role.
 
 ![](./images/LabPreReq7.png)
  
@@ -95,17 +103,6 @@ Now that the service principal is created, the correct permissions need to be ad
 
 ### Create a Resource Group and confirm you have owner level permissions 
 
-Create a Resource Group in the Azure subscription.  This resource group will be used in the lab to provision all the services needed to execute the lab. If you have contributor role permissions to the subscription, by default you will be assigned contribor role permissions to the resource group.  To complete this lab you need &#39;owner&#39; level permissions on the resource group. To get set up with owner level permissions, have an Azure Administrator add you as an owner to your Resource Group.    
+Create a **Resource Group** in the Azure subscription.  This Resource Group will be used in the lab to provision all the services needed to execute the lab. If you have contributor role permissions to the subscription, by default you will be assigned contributor role permissions to the Resource Group.  To complete this lab you need **owner** level permissions on the Resource Group. To get set up with owner level permissions, have an Azure Administrator add you as an owner to your Resource Group.    
 
-### Confirm your permissions level within the Azure subscription
-
-To complete the lab, you will need at least &#39;contributor&#39; level access to the Azure subscription. To view your access:
-
-1. From the azure portal ([http://portal.azure.com](http://portal.azure.com)), select subscriptions in the navigation bar and click on the subscription you will be using for this lab
-2. Select Access control (IAM) from the left menu
-3. Under the &#39;check access&#39; tab, search for your name and when it displays, review the role assigned to you. It should look similar to this:
-
-###
-
-![](./images/LabPreReq9.png)
 
