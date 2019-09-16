@@ -1,0 +1,13 @@
+AML_WORKSPACE_NAME	AML-WS
+EVALUATE_SCRIPT_PATH	evaluate/evaluate.py
+EXPERIMENT_NAME	mlopspython
+LOCATION	centralus
+MODEL_NAME	sklearn_regression_model.pkl
+REGISTER_SCRIPT_PATH	register/register_model.py
+RESOURCE_GROUP	 your resourcegroup name
+SOURCES_DIR_TRAIN	code
+SP_APP_ID	your service principal ID
+SP_APP_SECRET	your service principal secred
+SUBSCRIPTION_ID	your subrcirption id
+TENANT_ID	your tenantid
+TRAIN_SCRIPT_PATH	training/train.py
