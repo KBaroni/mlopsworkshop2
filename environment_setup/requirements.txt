@@ -1,4 +1,4 @@
-pytest==4.3.0
+pytest==9.0.3
 requests>=2.22
 azureml>=0.2
 azureml-sdk>=1.0
